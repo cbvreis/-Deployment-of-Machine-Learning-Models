@@ -1,30 +1,55 @@
-# This is a sample Python script.
+#Estudo de herança OO
+class Veiculo():
+    def __init__(self, cor, marca, modelo):
+        self.cor = cor
+        self.marca = marca
+        self.modelo = modelo
+        self.velocidade = 0
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import smtpd
+    def acelerar(self):
+        self.velocidade += 10
 
+    def frear(self):
+        self.velocidade -= 10
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-    import pandas as pd
-    df = pd.DataFrame(
-        {
-            'columns':df_dados.columns,
-            'nulls':df_dados.isnull().sum(),
-            'dtypes':df_dados.dtypes,
+class Carro(Veiculo):
+    def __init__(self,cor, marca, modelo, motor):
+        super().__init__(cor, marca, modelo)
+        self.motor  = motor
 
-        }
-    )
-
-#add two numbers
-def add(a,b):
-    return a+b
+    def acelerar(self):
+        self.velocidade += 20
 
 
-# Press the green button in the gutter to run the script.
+class Funcionario:
+    def __init__(self, nome, cargo, valor_hora_trabalhada):
+        self.nome = nome
+        self.cargo = cargo
+        self.valor_hora_trabalhada = valor_hora_trabalhada
+        self.__horas_trabalhadas = 0
+        self.__salario = 0
+
+    @property
+    def salario(self):
+        return self.__salario
+
+    @salario.setter
+    def salario(self, novo_salario):
+        raise ValueError("Impossivel alterar salario diretamente. use a funcao calcula_salario().")
+
+
+
+    def registra_hora_trabalhada(self):
+        self.horas_trabalhadas += 1
+
+    def calcula_salario(self):
+        self.__salario = self.__horas_trabalhadas * self.valor_hora_trabalhada
+
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    pedro = Funcionario('Pedro', 'Gerente de Vendas', 50)
+    pedro.salario = 100000
+    print(pedro.__salario)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
